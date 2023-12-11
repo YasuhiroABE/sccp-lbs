@@ -1,5 +1,5 @@
 ---
-- hosts: all
+- hosts: lb
   vars:
     mfts_timezone: "UTC"
     mfts_sysctl_rules: []

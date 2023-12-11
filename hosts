@@ -5,3 +5,8 @@ u109lb11 ansible_host=192.168.100.211 ansible_python_interpreter=/usr/bin/python
 u109lb12 ansible_host=192.168.100.212 ansible_python_interpreter=/usr/bin/python3
 u109lb13 ansible_host=192.168.100.213 ansible_python_interpreter=/usr/bin/python3
 u109lb14 ansible_host=192.168.100.214 ansible_python_interpreter=/usr/bin/python3
+
+[web]
+u109pi150 ansible_host=192.168.100.150 ansible_python_interpreter=/usr/bin/python3
+u109pi151 ansible_host=192.168.100.151 ansible_python_interpreter=/usr/bin/python3
+

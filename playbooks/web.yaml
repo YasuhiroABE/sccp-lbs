@@ -1,0 +1,35 @@
+---
+- hosts: web
+  vars:
+    mfts_timezone: "UTC"
+    mfts_sysctl_rules:
+      - { name: net.ipv4.conf.eth0.arp_ignore, value: 1 }
+      - { name: net.ipv4.conf.eth0.arp_announce, value: 2 }
+    mfts_setup_directory: []
+    mfts_copy_files:
+      - { src: "{{ inventory_dir }}/files/network/eth0.conf", dest: "/etc/network/interfaces.d/eth0.conf", owner: "root", group: "root", mode: "0644" }
+      - { src: "{{ inventory_dir }}/files/network/eth0:1.conf", dest: "/etc/network/interfaces.d/eth0:1.conf", owner: "root", group: "root", mode: "0644" }
+      - { src: "{{ inventory_dir }}/files/network/eth0:2.conf", dest: "/etc/network/interfaces.d/eth0:2.conf", owner: "root", group: "root", mode: "0644" }
+      - { src: "{{ inventory_dir }}/files/network/eth0:3.conf", dest: "/etc/network/interfaces.d/eth0:3.conf", owner: "root", group: "root", mode: "0644" }
+    mfts_command_after_copyfiles:
+      - { command: "uname -n | sudo tee /var/www/html/hostname.txt", become: "yes" }
+    mfts_replace_after_copyfiles:
+      - { path: "/etc/network/interfaces.d/eth0.conf", regexp: "^  address.*$", replace: "  address {{ ansible_host }}", before: "", after: "" }
+    mfts_additional_packages:
+      - apache2
+      - tcpdump
+    mfts_remove_packages: []
+    mfts_copy_files_after_packages:
+      - { src: "{{ inventory_dir }}/files/apache2/000-default.conf", dest: "/etc/apache2/sites-enabled/000-default.conf", owner: "root", group: "root", mode: "0644" }
+      - { src: "{{ inventory_dir }}/files/apache2/index.html", dest: "/var/www/html/index.html", owner: "root", group: "root", mode: "0644" }
+    mfts_lineinfile_after_packages: []
+    mfts_replace_after_packages:
+      - { path: "/var/www/html/index.html", regexp: "<h1 style=\"font-size: 24pt; color: pink;\">", replace: "<h1 style=\"font-size: 24pt; color: {{ ['pink','green','blue','red','midnightblue', 'beige','blueviolet', 'brown' ] | random()  }};\">", before: "", after: "" }
+    mfts_command_after_packages: []
+    mfts_systemd_rules:
+      - { name: "apache2.service", state: "restarted", enabled: "yes", daemon_reload: "yes" }
+  roles:
+    - YasuhiroABE.myfavorite-setting
+
+
+
