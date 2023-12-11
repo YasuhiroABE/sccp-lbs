@@ -1,16 +1,16 @@
 
 .PHONY: all
 all: doc
-	( . ../venv/ansible/bin/activate && ansible-playbook site.yml )
+	( . ./venv/ansible/bin/activate && ansible-playbook site.yml )
 
 .PHONY: ping
 ping:
-	( . ../venv/ansible/bin/activate && ansible all -m ping )
+	( . ./venv/ansible/bin/activate && ansible all -m ping )
 
 .PHONY: role-init
 role-init:
 	mkdir -p roles
-	( . ../venv/ansible/bin/activate && ansible-galaxy install YasuhiroABE.myfavorite-setting )
+	( . ./venv/ansible/bin/activate && ansible-galaxy install YasuhiroABE.myfavorite-setting )
 
 .PHONY: clean
 clean:
@@ -19,3 +19,8 @@ clean:
 .PHONY: doc
 doc:
 	mmark README.md > README.html
+
+.PHONY: venv
+venv:
+	python3 -m venv venv/ansible
+	( . venv/ansible/bin/activate && pip install ansible )

@@ -4,3 +4,4 @@ tests/**
 logs/**
 *.retry
 roles/**
+venv/**
