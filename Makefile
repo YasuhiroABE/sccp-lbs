@@ -1,6 +1,6 @@
 
 .PHONY: all
-all:
+all: doc
 	( . ../venv/ansible/bin/activate && ansible-playbook site.yml )
 
 .PHONY: ping
@@ -15,3 +15,7 @@ role-init:
 .PHONY: clean
 clean:
 	find . -name '*~' -exec rm {} \; -print
+
+.PHONY: doc
+doc:
+	mmark README.md > README.html
