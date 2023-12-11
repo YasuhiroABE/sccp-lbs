@@ -1,0 +1,7 @@
+
+[lb]
+u109lb10 ansible_host=192.168.100.210 ansible_python_interpreter=/usr/bin/python3
+u109lb11 ansible_host=192.168.100.211 ansible_python_interpreter=/usr/bin/python3
+u109lb12 ansible_host=192.168.100.212 ansible_python_interpreter=/usr/bin/python3
+u109lb13 ansible_host=192.168.100.213 ansible_python_interpreter=/usr/bin/python3
+u109lb14 ansible_host=192.168.100.214 ansible_python_interpreter=/usr/bin/python3

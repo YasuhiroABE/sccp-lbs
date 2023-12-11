@@ -1,0 +1,50 @@
+
+vrrp_instance SERVICE {
+  state MASTER
+  interface enp1s0
+  garp_master_delay 5
+  virtual_router_id XXX
+  priority WW
+  advert_int 1
+  authentication {
+    auth_type PASS
+    auth_pass YYY
+  }
+  virtual_ipaddress {
+    192.168.100.ZZZ/24 dev enp1s0
+  }
+}
+
+virtual_server 192.168.100.ZZZ 80 {
+  delay_loop 1
+  lb_algo rr
+  lb_kind DR
+  protocol TCP
+  real_server 192.168.100.150 80 {
+    weight 1
+    inhibit_on_failure
+    HTTP_GET {
+      url {
+        path /index.html
+        status_code 200
+      }
+      connect_timeout 1
+      nb_get_retry 1
+      delay_before_retry 1
+    }
+  }
+  real_server 192.168.100.151 80 {
+    weight 1
+    inhibit_on_failure
+    HTTP_GET {
+      url {
+        path /index.html
+        status_code 200
+      }
+      connect_timeout 1
+      nb_get_retry 1
+      delay_before_retry 1
+    }
+  }
+}
+
